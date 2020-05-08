@@ -72,10 +72,14 @@ class CustomEvents {
 				if (subs[j].id === eventId) {
 					// Debug logging
 					if (this._debug) { console.log(`Events.unsubscribe : subscription found\n`, subs[j], `\nSubscription n°${eventId} for ${subs.name} has been removed`); }
-					// Remove subscription from event Array
-					subs.splice(j, 1);
 					// Update status code
 					statusCode = true; // Found and unsubscribed status code (true)
+					// Remove subscription from event Array
+					subs.splice(j, 1);
+					// Remove event name if no remaining subscriptions
+					if (subs.length === 0) {
+						delete this._events[keys[i]];
+					}
 					// Break since id are unique and no other subscription can be found after
 					break;
 				}
@@ -116,8 +120,12 @@ class CustomEvents {
 					// Remove oneShot listener from event entry
 					if (subs[j].os) {
 						// Debug logging
-						if (this._debug) { console.log(`Events.publish : remove subscription because it was one shot`); }
+						if (this._debug) { console.log(`Events.publish : remove subscription because one shot usage is done`); }
 						subs.splice(j, 1);
+						// Remove event name if no remaining subscriptions
+						if (subs.length === 0) {
+							delete this._events[keys[i]];
+						}
 					}
 				}
 			}
