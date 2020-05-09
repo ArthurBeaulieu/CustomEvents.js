@@ -17,7 +17,7 @@ class CustomEvents {
 		/* We store custom events by name as key, each key stores an Array of subscribed events */
 		this._customEvents = {};
 		/* Component version */
-		this._version = '0.3';
+		this._version = '0.4';
 	}
 
 
@@ -182,6 +182,36 @@ class CustomEvents {
 					}
 					// Break since id are unique and no other subscription can be found after
 					break;
+				}
+			}
+		}
+		// Return with status code
+		return statusCode;
+	}
+
+
+	unsubscribeAllFor(eventName) {
+		// Debug logging
+		if (this._debug) { console.log('Events.unsubscribeAllFor : eventName', eventName); }
+		// Returned value
+		let statusCode = false; // Not found status code by default (false)
+		// Save event keys to iterate properly on this._events Object
+		let keys = Object.keys(this._customEvents);
+		// Reverse events iteration to properly splice without messing with iteration order
+		for (let i = (keys.length - 1); i >= 0; --i) {
+			if (keys[i] === eventName) {
+				// Get event subscriptions
+				let subs = this._customEvents[keys[i]];
+				// Iterate over events subscriptions to find the one with given id
+				for (let j = 0; j < subs.length; ++j) {
+					// Update status code
+					statusCode = true; // Found and unsubscribed all status code (true)
+					// Remove subscription from event Array
+					subs.splice(j, 1);
+					// Remove event name if no remaining subscriptions
+					if (subs.length === 0) {
+						delete this._customEvents[keys[i]];
+					}
 				}
 			}
 		}
