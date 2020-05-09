@@ -26,7 +26,7 @@ class CustomEvents {
 		// Remove all existing eventListener
 		this.removeAllListeners();
 		// Delete object attributes
-    Object.keys(this).forEach(key => { delete this[key]; });
+		Object.keys(this).forEach(key => { delete this[key]; });
 	}
 
 

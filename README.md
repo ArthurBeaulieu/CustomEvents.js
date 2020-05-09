@@ -6,7 +6,7 @@
 
 CustomEvents is a JavaScript ES6 component that offers a general event handler ; an abstraction of `addEventListener` and `removeEventListener` methods helps you easily manage your events, without bothering with usual binding issues that come along properly removing events. There is also an internal event system that allow you to define a custom event, and register as many subscriptions as you need to be called when you publish your custom event.
 
-With 10Ko unminified, CustomEvents was designed to be stable and remain as light as possible. It is meant to be used application wide (events that are global to all your components) or to be used in a classes so it easily manages all the class events (creation and desruction).
+With 10Ko unminified, CustomEvents was designed to be stable and remain as light as possible. It is meant to be used application wide (events that are global to all your components) or to be used in a classes so it easily manages all the class events (creation and destruction).
 
 # Get Started
 
