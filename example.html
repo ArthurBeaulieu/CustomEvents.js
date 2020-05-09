@@ -4,14 +4,22 @@
     <meta charset="utf-8">
   </head>
   <body>
-    <button id="subOnce" type="button" name="button">Sub one shot</button>
-    <button id="sub" type="button" name="button">Sub</button>
-    <button id="unsub" type="button" name="button">UnSub</button>
-    <button id="pub" type="button" name="button">Pub</button>
+    <h3>Custom event, see console (subscribe/unsubscribe/publish)</h3>
+    <button id="subOnce" type="button">Sub one shot</button>
+    <button id="sub" type="button">Sub</button>
+    <button id="unsub" type="button">UnSub</button>
+    <button id="pub" type="button">Pub</button>
+    <h3>Event listener overlay, see console (addEvent/removeEvent)</h3>
+    <button id="fireevt" type="button">Click me</button>
+    <button id="addevt" type="button">addEventListener</button>
+    <button id="rmevt" type="button">removeEventListener</button>
   </body>
   <script type="module">
     import CustomEvents from './CustomEvents.js';
     const MyAppEvents = new CustomEvents({ debug: true });
+
+    /* Custom events */
+
     // Demo utils
     const subOnceButton = document.getElementById('subOnce');
     const subButton = document.getElementById('sub');
@@ -51,5 +59,30 @@
         data: 'MyEventData'
       });
     }, false);
+
+    /* Event listener overlay */
+
+    // Demo utils
+    const fireEvt = document.getElementById('fireevt');
+    const addEvt = document.getElementById('addevt');
+    const rmEvt = document.getElementById('rmevt');
+    rmEvt.disabled = true;
+
+    const cb = event => {
+      console.log('Click callback fired', event);
+    };
+
+    let evtId = null;
+    addEvt.addEventListener('click', () => {
+      evtId = MyAppEvents.addEvent('click', fireEvt, cb, this);
+      rmEvt.disabled = false;
+      addEvt.disabled = true;
+    });
+
+    rmEvt.addEventListener('click', () => {
+      addEvt.disabled = false;
+      rmEvt.disabled = true;
+      MyAppEvents.removeEvent(evtId);
+    });
   </script>
 </html>

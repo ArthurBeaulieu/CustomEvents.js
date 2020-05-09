@@ -1,4 +1,4 @@
-const CustomEventsVersion = '0.1';
+const CustomEventsVersion = '0.2';
 
 
 class CustomEvents {
@@ -9,13 +9,18 @@ class CustomEvents {
 		this._debug = options.debug || false;
 		/* Start the ID incrementor at pseudo random value */
 		this._idIncrementor = (Math.floor(Math.random() * Math.floor(256)) * 5678);
-		/* We store events by name as key, each key stores an Array of subscribed events */
-		this._events = {};
+		/* We store custom events by name as key, each key stores an Array of subscribed events */
+		this._customEvents = {};
+		/* We store classical event listeners in array of objects containing all their informations */
+		this._regularEvents = [];
 	}
 
 
 	destroy() {
 		// Remove all existing eventListener
+		this.removeAllListeners();
+		// Delete object attributes
+    Object.keys(this).forEach(key => { delete this[key]; });
 	}
 
 
@@ -37,11 +42,11 @@ class CustomEvents {
 		// Debug logging
 		if (this._debug) { console.log('Events.subscribe', eventName, callback, oneShot); }
 		// Create event entry if not already existing in the registered events
-		if (!this._events[eventName]) {
-			this._events[eventName] = []; // Set empty array for new event subscriptions
+		if (!this._customEvents[eventName]) {
+			this._customEvents[eventName] = []; // Set empty array for new event subscriptions
 		}
 		// Push new subscription for event name
-		this._events[eventName].push({
+		this._customEvents[eventName].push({
 			id: this._idIncrementor,
 			name: eventName,
 			os: oneShot,
@@ -61,11 +66,11 @@ class CustomEvents {
 		// Returned value
 		let statusCode = false; // Not found status code by default (false)
 		// Save event keys to iterate properly on this._events Object
-		let keys = Object.keys(this._events);
+		let keys = Object.keys(this._customEvents);
 		// Reverse events iteration to properly splice without messing with iteration order
 		for (let i = (keys.length - 1); i >= 0; --i) {
 			// Get event subscriptions
-			let subs = this._events[keys[i]];
+			let subs = this._customEvents[keys[i]];
 			// Iterate over events subscriptions to find the one with given id
 			for (let j = 0; j < subs.length; ++j) {
 				// In case we got a subscription for this events
@@ -78,7 +83,7 @@ class CustomEvents {
 					subs.splice(j, 1);
 					// Remove event name if no remaining subscriptions
 					if (subs.length === 0) {
-						delete this._events[keys[i]];
+						delete this._customEvents[keys[i]];
 					}
 					// Break since id are unique and no other subscription can be found after
 					break;
@@ -101,7 +106,7 @@ class CustomEvents {
 		// Returned value
 		let statusCode = false; // Not found status code by default (false)
 		// Save event keys to iterate properly on this._events Object
-		let keys = Object.keys(this._events);
+		let keys = Object.keys(this._customEvents);
 		// Iterate over saved custom events
 		for (let i = 0; i < keys.length; ++i) {
 			// If published name match an existing events, we iterate its subscriptions. First subscribed, first served
@@ -109,7 +114,7 @@ class CustomEvents {
 				// Update status code
 				statusCode = true; // Found and published status code (true)
 				// Get event subscriptions
-				let subs = this._events[keys[i]];
+				let subs = this._customEvents[keys[i]];
 				// Iterate over events subscriptions to find the one with given id
 				// Reverse subscriptions iteration to properly splice without messing with iteration order
 				for (let j = (subs.length - 1); j >= 0; --j) {
@@ -124,7 +129,7 @@ class CustomEvents {
 						subs.splice(j, 1);
 						// Remove event name if no remaining subscriptions
 						if (subs.length === 0) {
-							delete this._events[keys[i]];
+							delete this._customEvents[keys[i]];
 						}
 					}
 				}
@@ -136,15 +141,91 @@ class CustomEvents {
 
 
 	/**  ----------  Classic EventListener override  ----------  **/
+	/**  The following methods are made to abstract the event    **/
+	/**  listeners from the JavaScript layer, so you can easily  **/
+	/**  remove them when done using, without bothering with     **/
+	/**  binding usual business for 'em. 'addEvent/removeEvent'  **/
+	/**  method replace the initial ones. 'removeAllListeners'   **/
+	/**  clears all instance event listeners ; nice for destroy  **/
 
 
-	addEvent() {
-		// TODO
+	/** addEvent method abstracts the addEventListener method to easily remove it when needed
+	* @param {string} eventName - The event name to fire (mousemove, click, context etc.)
+	* @param {object} element - The DOM element to attach the listener to
+	* @param {function} callback - The callback function to execute when event is realised
+	* @param {object} [scope] - The event scope to apply to the callback (optional, default to DOM element)
+	* @param {object} [options] - The event options (useCapture and else)
+	* @returns {number} - The event ID to use if manually removing event listener **/
+	addEvent(eventName, element, callback, scope = element, options = false) {
+		// Save scope to callback function, default scope is DOM target object
+		callback = callback.bind(scope);
+		// Add event to internal array and keep all its data
+		this._regularEvents.push({
+			id: this._idIncrementor,
+			element: element,
+			eventName: eventName,
+			scope: scope,
+			callback: callback,
+			options: options
+		});
+		// Add event listener with options
+		element.addEventListener(eventName, callback, options);
+		// Post increment to return the true event entry id, then update the incrementor
+		return this._idIncrementor++;
 	}
 
 
-	removeEvent() {
-		// TODO
+	/** removeEvent method abstracts the removeEventListener method to really remove event listeners
+	* @param {number} eventId - The event ID to remove listener from. Returned when addEvent is called
+	* @returns {boolean} - The method status ; true for success, false for non-existing event **/
+	removeEvent(eventId) {
+		// Returned value
+		let statusCode = false; // Not found status code by default (false)
+		// Iterate over saved listeners, reverse order for proper splicing
+		for (let i = (this._regularEvents.length - 1); i >=0 ; --i) {
+			// If an event ID match in saved ones, we remove it and update saved listeners
+			if (this._regularEvents[i].id === eventId) {
+				// Update status code
+				statusCode = true; // Found and removed event listener status code (true)
+				this._clearEventFromSaved(i);
+			}
+		}
+		// Return with status code
+		return statusCode;
+	}
+
+
+	/** removeEvent method abstracts the removeEventListener method to really remove event listeners
+	* @returns {boolean} - The method status ; true for success, false for not removed any event **/
+	removeAllListeners() {
+		// Returned value
+		let statusCode = false; // Didn't removed any status code by default (false)
+		// Flag to know if there was any previously stored event listeners
+		let hadEvents = (this._regularEvents.length > 0);
+		// Iterate over saved listeners, reverse order for proper splicing
+		for (let i = (this._regularEvents.length - 1); i >=0 ; --i) {
+			this._clearEventFromSaved(i);
+		}
+		// If all events where removed, update statusCode to success
+		if (this._regularEvents.length === 0 && hadEvents) {
+			// Update status code
+			statusCode = true; // Found and removed all events listener status code (true)
+		}
+		// Return with status code
+		return statusCode;
+	}
+
+
+	/** _clearEventFromSaved method remove the saved event listener for a given index in regularEvents array range
+	* @param {number} index - The regular event index to remove from class attributes **/
+	_clearEventFromSaved(index) {
+		// Check if index match an existing event in attributes
+		if (this._regularEvents[index]) {
+			// Remove its event listenet and update regularEvents array
+			let evt = this._regularEvents[index];
+			evt.element.removeEventListener(evt.eventName, evt.callback, evt.options);
+			this._regularEvents.splice(index, 1);
+		}
 	}
 
 
