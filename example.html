@@ -13,6 +13,8 @@
     <button id="fireevt" type="button">Click me</button>
     <button id="addevt" type="button">addEventListener</button>
     <button id="rmevt" type="button">removeEventListener</button>
+    <h3>Destroy CustomEvents (will output errors in console)</h3>
+    <button id="destroy" type="button">Destroy</button>
   </body>
   <script type="module">
     import CustomEvents from './CustomEvents.js';
@@ -84,5 +86,13 @@
       rmEvt.disabled = true;
       MyAppEvents.removeEvent(evtId);
     });
+
+
+    /* Destroy CustomEvents handler */
+    const destroy = document.getElementById('destroy');
+    destroy.addEventListener('click', () => {
+      MyAppEvents.destroy();
+    });
+
   </script>
 </html>
