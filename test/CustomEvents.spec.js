@@ -29,7 +29,7 @@ describe('CustomEvents unit test', () => {
 
 
   it('Component construction in debug mode', done => {
-    // Re-instanciate AppEvents in debug
+    // Re-instantiate AppEvents in debug
     AppEvents = new CustomEvents(true);
     // Component proper construction
     expect(AppEvents._debug).toEqual(true);
@@ -130,8 +130,8 @@ describe('CustomEvents unit test', () => {
     expect(AppEvents._regularEvents.length).toEqual(0);
     // Remove an already removed event
     expect(AppEvents.removeEvent(evtId)).toEqual(false);
-    // Missing argument test    
-    expect(AppEvents.removeEvent()).toEqual(false);    
+    // Missing argument test
+    expect(AppEvents.removeEvent()).toEqual(false);
     done();
   });
 
@@ -156,7 +156,7 @@ describe('CustomEvents unit test', () => {
     // No event can be removed at this point, returning a false status
     expect(AppEvents.removeAllEvents()).toEqual(false);
     done();
-  });  
+  });
 
 
   it('Private method _clearRegularEvent', done => {
@@ -204,14 +204,14 @@ describe('CustomEvents unit test', () => {
     let called = 0;
     const evtId = AppEvents.subscribe('TestEvent', () => {
       expect(Object.keys(AppEvents._customEvents['TestEvent']).length).toEqual(1);
-      expect(AppEvents._customEvents['TestEvent'][0].id).toEqual(AppEvents._idIncrementor - 1);      
+      expect(AppEvents._customEvents['TestEvent'][0].id).toEqual(AppEvents._idIncrementor - 1);
       expect(AppEvents._customEvents['TestEvent'][0].name).toEqual('TestEvent');
       expect(AppEvents._customEvents['TestEvent'][0].os).toEqual(false);
       expect(typeof AppEvents._customEvents['TestEvent'][0].callback).toEqual('function');
       called++;
     });
     expect(typeof evtId).toEqual('number');
-    expect(evtId).toEqual(AppEvents._idIncrementor - 1);    
+    expect(evtId).toEqual(AppEvents._idIncrementor - 1);
     // All subscribe expects will be handle in publish call
     AppEvents.publish('TestEvent');
     // Check proper Events state
@@ -246,7 +246,7 @@ describe('CustomEvents unit test', () => {
     expect(called).toEqual(1);
     // All subscribe expects will be handle in publish call, we send here data
     AppEvents.publish('TestEvent');
-    expect(called).toEqual(1);   
+    expect(called).toEqual(1);
     done();
   });
 
@@ -272,7 +272,7 @@ describe('CustomEvents unit test', () => {
     expect(Object.keys(AppEvents._customEvents).length).toEqual(0);
     expect(AppEvents.unsubscribe(subsId)).toEqual(false);
     // Missing parameters for subscribe
-    expect(AppEvents.unsubscribe()).toEqual(false); 
+    expect(AppEvents.unsubscribe()).toEqual(false);
     done();
   });
 
@@ -291,10 +291,10 @@ describe('CustomEvents unit test', () => {
     expect(Object.keys(AppEvents._customEvents).length).toEqual(1);
     // All subscribe expects will be handle in publish call, we send here data
     expect(AppEvents.unsubscribeAllFor('TestEvent')).toEqual(true);
-    expect(Object.keys(AppEvents._customEvents).length).toEqual(0);    
+    expect(Object.keys(AppEvents._customEvents).length).toEqual(0);
     expect(AppEvents.unsubscribeAllFor('TestEvent')).toEqual(false);
     // Missing parameters for subscribe
-    expect(AppEvents.unsubscribeAllFor()).toEqual(false); 
+    expect(AppEvents.unsubscribeAllFor()).toEqual(false);
     done();
   });
 

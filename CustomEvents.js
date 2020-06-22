@@ -26,10 +26,10 @@ class CustomEvents {
      * @member {any[]} - We store classical event listeners in array of objects containing all their information */
     this._regularEvents = [];
     /** @private
-     * @member {object} - We store custom events by name as key, each key stores an Array of subscribed events */    
+     * @member {object} - We store custom events by name as key, each key stores an Array of subscribed events */
     this._customEvents = {};
     /** @public
-     * @member {string} - Component version */      
+     * @member {string} - Component version */
     this.version = '1.0.0';
   }
 
@@ -41,7 +41,7 @@ class CustomEvents {
    * @description <blockquote>CustomEvents destructor. Will remove all event listeners and keys in instance.</blockquote> */
   destroy() {
     // Debug logging
-    if (this._debug) { console.log('Events.destroy'); }  
+    if (this._debug) { console.log('Events.destroy'); }
     // Remove all existing eventListener
     this.removeAllEvents();
     // Delete object attributes
@@ -51,11 +51,11 @@ class CustomEvents {
 
   /*  --------------------------------------------------------------------------------------------------------------- */
   /*  --------------------------------------  CLASSIC JS EVENTS OVERRIDE  ------------------------------------------  */
-  /*                                                                                                                  */  
+  /*                                                                                                                  */
   /*  The following methods are made to abstract the event listeners from the JavaScript layer, so you can easily     */
   /*  remove them when done using, without bothering with binding usual business for them. 'addEvent/removeEvent'     */
   /*  method replace the initial ones. 'removeAllEvents' clears all instance event listeners ; nice for destroy       */
-  /*  --------------------------------------------------------------------------------------------------------------- */    
+  /*  --------------------------------------------------------------------------------------------------------------- */
 
 
   /** @method
@@ -72,9 +72,9 @@ class CustomEvents {
    * @returns {number|boolean} - The event ID to use to manually remove an event, false if arguments are invalid */
   addEvent(eventName, element, callback, scope = element, options = false) {
     // Missing mandatory arguments
-    if (eventName === undefined || eventName === null ||
-        element === undefined || element === null ||
-        callback === null || callback === undefined) {
+    if (eventName === null || eventName === undefined ||
+      element === null || element === undefined ||
+      callback === null || callback === undefined) {
       if (this._debug) { console.error('Events.addEvent', 'Missing mandatory arguments'); }
       return false;
     }
@@ -88,7 +88,7 @@ class CustomEvents {
       if (typeof options !== 'object' && typeof options !== 'boolean') { err(); return false; }
     }
     // Debug logging
-    if (this._debug) { console.log('Events.addEvent', eventName, element, callback, scope, options); }    
+    if (this._debug) { console.log('Events.addEvent', eventName, element, callback, scope, options); }
     // Save scope to callback function, default scope is DOM target object
     callback = callback.bind(scope);
     // Add event to internal array and keep all its data
@@ -125,7 +125,7 @@ class CustomEvents {
     const err = () => { if (this._debug) { console.error('Events.removeEvent', 'Wrong type for argument'); } };
     if (typeof eventId !== 'number') { err(); return false; }
     // Debug logging
-    if (this._debug) { console.log('Events.removeEvent', eventId); }       
+    if (this._debug) { console.log('Events.removeEvent', eventId); }
     // Returned value
     let statusCode = false; // Not found status code by default (false)
     // Iterate over saved listeners, reverse order for proper splicing
@@ -150,7 +150,7 @@ class CustomEvents {
    * @returns {boolean} - The method status ; true for success, false for not removed any event */
   removeAllEvents() {
     // Debug logging
-    if (this._debug) { console.log('Events.removeAllEvents'); }       
+    if (this._debug) { console.log('Events.removeAllEvents'); }
     // Returned value
     let statusCode = false; // Didn't removed any status code by default (false)
     // Flag to know if there was any previously stored event listeners
@@ -173,7 +173,7 @@ class CustomEvents {
    * @name _clearRegularEvent
    * @private
    * @memberof CustomEvents
-   * @description <blockquote><code>_clearRegularEvent</code> method remove the saved event listener for a 
+   * @description <blockquote><code>_clearRegularEvent</code> method remove the saved event listener for a
    * given index in regularEvents array range.</blockquote>
    * @param {number} index - The regular event index to remove from class attributes
    * @return {boolean} - The method status ; true for success, false for not cleared any event */
@@ -187,7 +187,7 @@ class CustomEvents {
     const err = () => { if (this._debug) { console.error('Events._clearRegularEvent', 'Wrong type for argument'); } };
     if (typeof index !== 'number') { err(); return false; }
     // Debug logging
-    if (this._debug) { console.log('Events._clearRegularEvent', index); }      
+    if (this._debug) { console.log('Events._clearRegularEvent', index); }
     // Check if index match an existing event in attributes
     if (this._regularEvents[index]) {
       // Remove its event listener and update regularEvents array
@@ -201,7 +201,7 @@ class CustomEvents {
 
   /*  --------------------------------------------------------------------------------------------------------------- */
   /*  -------------------------------------------  CUSTOM JS EVENTS  -----------------------------------------------  */
-  /*                                                                                                                  */  
+  /*                                                                                                                  */
   /*  The three following methods (subscribe, unsubscribe, publish) are designed to reference an event by its name    */
   /*  and handle as many subscriptions as you want. When subscribing, you get an ID you can use to unsubscribe your   */
   /*  event later. Just publish with the event name to callback all its registered subscriptions.                     */
@@ -220,7 +220,7 @@ class CustomEvents {
   subscribe(eventName, callback, oneShot = false) {
     // Missing mandatory arguments
     if (eventName === null || eventName === undefined ||
-        callback === null || callback === undefined) {
+      callback === null || callback === undefined) {
       if (this._debug) { console.error('Events.subscribe', 'Missing mandatory arguments'); }
       return false;
     }
