@@ -1,6 +1,6 @@
 # CustomEvents.js
 
-![](https://badgen.net/badge/version/0.5/blue)
+![](https://badgen.net/badge/version/1.0.0/blue)
 [![License](https://img.shields.io/github/license/ArthurBeaulieu/CustomEvents.js.svg)](https://github.com/ArthurBeaulieu/CustomEvents.js/blob/master/LICENSE.md)
 ![](https://badgen.net/badge/test/passed/green)
 
@@ -19,7 +19,7 @@ import CustomEvents from 'CustomEvents.js';
 /* Create an event handler*/
 const myEventHandler = new CustomEvents();
 /* ...Or, if you want to have a verbose console output */
-const myEventHandler = new CustomEvents({ debug: true });
+const myEventHandler = new CustomEvents(true);
 ```
 
 When instanciated, your event handler is ready to register events.
@@ -59,7 +59,7 @@ Finally, if you want to manually clear all registered event listeners :
 
 ```javascript
 // This will remove all saved event listeners
-myEventHandler.removeAllListeners();
+myEventHandler.removeAllEvents();
 // ...Or, calling destroy will also unregister saved event listeners, among destroying handler
 myEventHandler.destroy();
 ```

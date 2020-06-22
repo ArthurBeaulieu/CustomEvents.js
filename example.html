@@ -18,7 +18,7 @@
   </body>
   <script type="module">
     import CustomEvents from './CustomEvents.js';
-    const MyAppEvents = new CustomEvents({ debug: true });
+    const MyAppEvents = new CustomEvents(true);
 
     /* Custom events */
 
@@ -52,10 +52,6 @@
       MyAppEvents.unsubscribe(myEventId);
     }, false);
     pubButton.addEventListener('click', () => {
-    // Publish an event by name and fire all its subscriptions
-      // Publish event
-      // MyAppEvents.publish('MyEvent');
-
       // Publish event with data
       MyAppEvents.publish('MyEvent', {
         data: 'MyEventData'
@@ -86,7 +82,6 @@
       rmEvt.disabled = true;
       MyAppEvents.removeEvent(evtId);
     });
-
 
     /* Destroy CustomEvents handler */
     const destroy = document.getElementById('destroy');

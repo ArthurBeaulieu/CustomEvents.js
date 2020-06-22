@@ -1,17 +1,67 @@
-'use strict';
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Source: CustomEvents.js | CustomEvent.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">CustomEvent.js</a></h1>
+        
+            <span class="version">v1.0.0</span>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="CustomEvents.html">CustomEvents</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="CustomEvents_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="CustomEvents.html#_customEvents">_customEvents</a></li><li><a href="CustomEvents.html#_debug">_debug</a></li><li><a href="CustomEvents.html#_idIncrementor">_idIncrementor</a></li><li><a href="CustomEvents.html#_regularEvents">_regularEvents</a></li><li><a href="CustomEvents.html#version">version</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="CustomEvents.html#._clearRegularEvent">_clearRegularEvent</a></li><li><a href="CustomEvents.html#.addEvent">addEvent</a></li><li><a href="CustomEvents.html#.destroy">destroy</a></li><li><a href="CustomEvents.html#.publish">publish</a></li><li><a href="CustomEvents.html#.removeAllEvents">removeAllEvents</a></li><li><a href="CustomEvents.html#.removeEvent">removeEvent</a></li><li><a href="CustomEvents.html#.subscribe">subscribe</a></li><li><a href="CustomEvents.html#.unsubscribe">unsubscribe</a></li><li><a href="CustomEvents.html#.unsubscribeAllFor">unsubscribeAllFor</a></li></ul></div></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
 
 
 class CustomEvents {
 
 
-  /** @summary <h1>JavaScript regular and custom events abstraction</h1>
+  /** @summary &lt;h1>JavaScript regular and custom events abstraction&lt;/h1>
    * @author Arthur Beaulieu
    * @since June 2020
-   * @description <blockquote>The CustomEvents class provides an abstraction of JavaScript event listener, to allow
+   * @description &lt;blockquote>The CustomEvents class provides an abstraction of JavaScript event listener, to allow
    * easy binding and removing those events. It also provides an interface to register custom events. This class is
    * meant to be used on all scopes you need ; module or global. Refer to each public method for detailed features.
-   * For source code, please go to <a href="https://github.com/ArthurBeaulieu/CustomEvents.js" alt="custom-events-js">
-   * https://github.com/ArthurBeaulieu/CustomEvents.js</a></blockquote>
+   * For source code, please go to &lt;a href="https://github.com/ArthurBeaulieu/CustomEvents.js" alt="custom-events-js">
+   * https://github.com/ArthurBeaulieu/CustomEvents.js&lt;/a>&lt;/blockquote>
    * @param {boolean} [debug=false] - Debug flag ; when true, logs will be output in JavaScript console at each event */
   constructor(debug = false) {
     // Prevent wrong type for debug
@@ -38,7 +88,7 @@ class CustomEvents {
    * @name destroy
    * @public
    * @memberof CustomEvents
-   * @description <blockquote>CustomEvents destructor. Will remove all event listeners and keys in instance.</blockquote> */
+   * @description &lt;blockquote>CustomEvents destructor. Will remove all event listeners and keys in instance.&lt;/blockquote> */
   destroy() {
     // Debug logging
     if (this._debug) { console.log('Events.destroy'); }  
@@ -62,8 +112,8 @@ class CustomEvents {
    * @name addEvent
    * @public
    * @memberof CustomEvents
-   * @description <blockquote><code>addEvent</code> method abstracts the <code>addEventListener</code> method to easily
-   * remove it when needed, also to set a custom scope on callback.</blockquote>
+   * @description &lt;blockquote>&lt;code>addEvent&lt;/code> method abstracts the &lt;code>addEventListener&lt;/code> method to easily
+   * remove it when needed, also to set a custom scope on callback.&lt;/blockquote>
    * @param {string} eventName - The event name to fire (mousemove, click, context etc.)
    * @param {object} element - The DOM element to attach the listener to
    * @param {function} callback - The callback function to execute when event is realised
@@ -83,9 +133,9 @@ class CustomEvents {
     if (typeof eventName !== 'string') { err(); return false; }
     if (typeof element !== 'object') { err(); return false; }
     if (typeof callback !== 'function') { err(); return false; }
-    if ((scope !== null && scope !== undefined) && typeof scope !== 'object') { err(); return false; }
-    if ((options !== null && options !== undefined)) {
-      if (typeof options !== 'object' && typeof options !== 'boolean') { err(); return false; }
+    if ((scope !== null &amp;&amp; scope !== undefined) &amp;&amp; typeof scope !== 'object') { err(); return false; }
+    if ((options !== null &amp;&amp; options !== undefined)) {
+      if (typeof options !== 'object' &amp;&amp; typeof options !== 'boolean') { err(); return false; }
     }
     // Debug logging
     if (this._debug) { console.log('Events.addEvent', eventName, element, callback, scope, options); }    
@@ -111,8 +161,8 @@ class CustomEvents {
    * @name removeEvent
    * @public
    * @memberof CustomEvents
-   * @description <blockquote><code>removeEvent</code> method abstracts the <code>removeEventListener</code> method to
-   * really remove event listeners.</blockquote>
+   * @description &lt;blockquote>&lt;code>removeEvent&lt;/code> method abstracts the &lt;code>removeEventListener&lt;/code> method to
+   * really remove event listeners.&lt;/blockquote>
    * @param {number} eventId - The event ID to remove listener from. Returned when addEvent is called
    * @returns {boolean} - The method status ; true for success, false for non-existing event */
   removeEvent(eventId) {
@@ -146,7 +196,7 @@ class CustomEvents {
    * @name removeAllEvents
    * @public
    * @memberof CustomEvents
-   * @description <blockquote>Clear all event listener registered through this class object.</blockquote>
+   * @description &lt;blockquote>Clear all event listener registered through this class object.&lt;/blockquote>
    * @returns {boolean} - The method status ; true for success, false for not removed any event */
   removeAllEvents() {
     // Debug logging
@@ -160,7 +210,7 @@ class CustomEvents {
       this._clearRegularEvent(i);
     }
     // If all events where removed, update statusCode to success
-    if (this._regularEvents.length === 0 && hadEvents) {
+    if (this._regularEvents.length === 0 &amp;&amp; hadEvents) {
       // Update status code
       statusCode = true; // Found and removed all events listener status code (true)
     }
@@ -173,8 +223,8 @@ class CustomEvents {
    * @name _clearRegularEvent
    * @private
    * @memberof CustomEvents
-   * @description <blockquote><code>_clearRegularEvent</code> method remove the saved event listener for a 
-   * given index in regularEvents array range.</blockquote>
+   * @description &lt;blockquote>&lt;code>_clearRegularEvent&lt;/code> method remove the saved event listener for a 
+   * given index in regularEvents array range.&lt;/blockquote>
    * @param {number} index - The regular event index to remove from class attributes
    * @return {boolean} - The method status ; true for success, false for not cleared any event */
   _clearRegularEvent(index) {
@@ -212,7 +262,7 @@ class CustomEvents {
    * @name subscribe
    * @public
    * @memberof CustomEvents
-   * @description <blockquote>Subscribe method allow you to listen to an event and react when it occurs.</blockquote>
+   * @description &lt;blockquote>Subscribe method allow you to listen to an event and react when it occurs.&lt;/blockquote>
    * @param {string} eventName - Event name (the one to use to publish)
    * @param {function} callback - The callback to execute when event is published
    * @param {boolean} [oneShot=false] - One shot : to remove subscription the first time callback is fired
@@ -228,7 +278,7 @@ class CustomEvents {
     const err = () => { if (this._debug) { console.error('Events.subscribe', 'Wrong type for argument'); } };
     if (typeof eventName !== 'string') { err(); return false; }
     if (typeof callback !== 'function') { err(); return false; }
-    if ((oneShot !== null && oneShot !== undefined) && typeof oneShot !== 'boolean') { err(); return false; }
+    if ((oneShot !== null &amp;&amp; oneShot !== undefined) &amp;&amp; typeof oneShot !== 'boolean') { err(); return false; }
     // Debug logging
     if (this._debug) { console.log('Events.subscribe', eventName, callback, oneShot); }
     // Create event entry if not already existing in the registered events
@@ -251,7 +301,7 @@ class CustomEvents {
    * @name unsubscribe
    * @public
    * @memberof CustomEvents
-   * @description <blockquote>Unsubscribe method allow you to revoke an event subscription from its string name.</blockquote>
+   * @description &lt;blockquote>Unsubscribe method allow you to revoke an event subscription from its string name.&lt;/blockquote>
    * @param {number} eventId - The subscription id returned when subscribing to an event name
    * @returns {boolean} - The method status ; true for success, false for non-existing subscription **/
   unsubscribe(eventId) {
@@ -274,7 +324,7 @@ class CustomEvents {
       // Get event subscriptions
       let subs = this._customEvents[keys[i]];
       // Iterate over events subscriptions to find the one with given id
-      for (let j = 0; j < subs.length; ++j) {
+      for (let j = 0; j &lt; subs.length; ++j) {
         // In case we got a subscription for this events
         if (subs[j].id === eventId) {
           // Debug logging
@@ -301,7 +351,7 @@ class CustomEvents {
    * @name unsubscribeAllFor
    * @public
    * @memberof CustomEvents
-   * @description <blockquote><code>unsubscribeAllFor</code> method clear all subscriptions registered for given event name.</blockquote>
+   * @description &lt;blockquote>&lt;code>unsubscribeAllFor&lt;/code> method clear all subscriptions registered for given event name.&lt;/blockquote>
    * @param {string} eventName - The event to clear subscription from
    * @returns {boolean} - The method status ; true for success, false for non-existing event **/
   unsubscribeAllFor(eventName) {
@@ -320,7 +370,7 @@ class CustomEvents {
     // Save event keys to iterate properly on this._events Object
     let keys = Object.keys(this._customEvents);
     // Iterate through custom event keys to find matching event to remove
-    for (let i = 0; i < keys.length; ++i) {
+    for (let i = 0; i &lt; keys.length; ++i) {
       if (keys[i] === eventName) {
         // Get event subscriptions
         let subs = this._customEvents[keys[i]];
@@ -346,7 +396,7 @@ class CustomEvents {
    * @name publish
    * @public
    * @memberof CustomEvents
-   * @description <blockquote><code>Publish</code> method allow you to fire an event by name and trigger all its subscription by callbacks./blockquote>
+   * @description &lt;blockquote>&lt;code>Publish&lt;/code> method allow you to fire an event by name and trigger all its subscription by callbacks./blockquote>
    * @param {string} eventName - Event name (the one to use to publish)
    * @param {object} [data=undefined] - The data object to sent through the custom event
    * @returns {boolean} - The method status ; true for success, false for non-existing event **/
@@ -359,7 +409,7 @@ class CustomEvents {
     // Prevent wrong type for arguments (mandatory and optional)
     const err = () => { if (this._debug) { console.error('Events.unsubscribeAllFor', 'Wrong type for argument'); } };
     if (typeof eventName !== 'string') { err(); return false; }
-    if (data !== undefined && typeof data !== 'object') { err(); return false; }
+    if (data !== undefined &amp;&amp; typeof data !== 'object') { err(); return false; }
     // Debug logging
     if (this._debug) { console.log('Events.publish', eventName, data); }
     // Returned value
@@ -367,7 +417,7 @@ class CustomEvents {
     // Save event keys to iterate properly on this._events Object
     let keys = Object.keys(this._customEvents);
     // Iterate over saved custom events
-    for (let i = 0; i < keys.length; ++i) {
+    for (let i = 0; i &lt; keys.length; ++i) {
       // If published name match an existing events, we iterate its subscriptions. First subscribed, first served
       if (keys[i] === eventName) {
         // Update status code
@@ -403,3 +453,33 @@ class CustomEvents {
 
 
 export default CustomEvents;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">CustomEvent.js</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>
