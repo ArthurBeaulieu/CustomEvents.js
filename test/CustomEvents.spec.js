@@ -1,4 +1,4 @@
-import CustomEvents from '../CustomEvents.js'
+import CustomEvents from '../src/CustomEvents.js'
 'use strict';
 
 

@@ -2,15 +2,11 @@
   "name": "customevents.js",
   "version": "1.0.0",
   "description": "Custom events handler for JavaScript apps. KISS, light and library free.",
-  "main": "CustomEvents.js",
-  "scripts": {
-    "build": "webpack --env.version=1.0.0 --progress",
-    "dev": "webpack --env.version=1.0.0 --env.dev=true --progress",
-    "doc": "jsdoc -c ./jsDoc.json",
-    "test": "karma start karma.config.js",
-    "testdev": "karma start karma.config.js --dev=true"
-  },
+  "keywords": ["javascript", "event-handler", "register-events", "event-listener", "es6-module"],
   "homepage": "https://github.com/ArthurBeaulieu/CustomEvents.js",
+  "license": "GPL-3.0",
+  "author": "Arthur Beaulieu",
+  "main": "src/CustomEvents.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ArthurBeaulieu/CustomEvents.js.git"
@@ -18,8 +14,13 @@
   "bugs": {
     "url": "https://github.com/ArthurBeaulieu/CustomEvents.js/issues"
   },
-  "author": "Arthur Beaulieu",
-  "license": "GPL-3.0",
+  "scripts": {
+    "build": "webpack --env.version=1.0.0 --progress",
+    "dev": "webpack --env.version=1.0.0 --env.dev=true --progress",
+    "doc": "jsdoc -c ./jsDoc.json",
+    "test": "karma start karma.config.js",
+    "testdev": "karma start karma.config.js --dev=true"
+  },
   "devDependencies": {
     "@babel/core": ">=7.1.2",
     "autoprefixer": ">=9.3.0",
@@ -30,8 +31,9 @@
     "jsdoc": ">=3.5.5",
     "karma": ">=5.0.9",
     "karma-chrome-launcher": ">=2.2.0",
-    "karma-coverage": ">=1.1.2",
     "karma-firefox-launcher": ">=1.1.0",
+    "karma-edge-launcher": "^0.4.2",
+    "karma-coverage": ">=1.1.2",
     "karma-jasmine": ">=1.1.2",
     "karma-sourcemap-loader": ">=0.3.7",
     "karma-webpack": ">=4.0.0",

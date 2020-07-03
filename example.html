@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
+    <title>CustomEvents.js 1.0.0 - Demo</title>
+    <style>
+html, body { font-family: sans-serif; height: 100%; margin: 0; width: 100%; }
+body { align-items: center; display: flex; flex-direction: column; justify-content: center; }
+button { border: solid 1px grey; border-radius: 5px; cursor: pointer; margin: 5px; padding: 5px 10px; }
+button[disabled] { cursor: not-allowed; }
+    </style>
   </head>
   <body>
+    <a href="https://github.com/ArthurBeaulieu/CustomEvents.js" target="_blank" style="position: absolute; left: 0; top: 0;"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    <h1>CustomEvents.js - Version 1.0.0</h1>
     <h3>Custom event, see console (subscribe/unsubscribe/publish)</h3>
-    <button id="subOnce" type="button">Sub one shot</button>
-    <button id="sub" type="button">Sub</button>
-    <button id="unsub" type="button">UnSub</button>
-    <button id="pub" type="button">Pub</button>
+    <button id="subOnce" type="button">One shot subscribe</button>
+    <button id="sub" type="button">Subscribe</button>
+    <button id="unsub" type="button">Unsubscribe</button>
+    <button id="pub" type="button">Publish</button>
     <h3>Event listener overlay, see console (addEvent/removeEvent)</h3>
     <button id="fireevt" type="button">Click me</button>
     <button id="addevt" type="button">addEventListener</button>
@@ -17,7 +26,7 @@
     <button id="destroy" type="button">Destroy</button>
   </body>
   <script type="module">
-    import CustomEvents from './CustomEvents.js';
+    import CustomEvents from './src/CustomEvents.js';
     const MyAppEvents = new CustomEvents(true);
 
     /* Custom events */
@@ -30,7 +39,7 @@
     unsubButton.disabled = true;
     let myEventId = -1;
     subOnceButton.addEventListener('click', () => {
-    // One shot subscribsption example
+      // One shot subscription example
       subOnceButton.disabled = true;
       MyAppEvents.subscribe('MyEvent', cbData => {
         console.log('Caller one shot received data', cbData);
@@ -38,7 +47,7 @@
       }, true);
     });
     subButton.addEventListener('click', () => {
-    // Subscribsption example
+      // Subscription example
       subButton.disabled = true;
       unsubButton.disabled = false;
       myEventId = MyAppEvents.subscribe('MyEvent', cbData => {
@@ -46,7 +55,7 @@
       });
     });
     unsubButton.addEventListener('click', () => {
-    // Unsubscribption example (must provide a subscription id)
+      // Unsubscription example (must provide a subscription id)
       subButton.disabled = false;
       unsubButton.disabled = true;
       MyAppEvents.unsubscribe(myEventId);

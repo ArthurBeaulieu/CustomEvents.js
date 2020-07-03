@@ -59,21 +59,23 @@
     <section>
         <article class="readme"><h1>CustomEvents.js</h1>
 <p><img src="https://badgen.net/badge/version/1.0.0/blue" alt="">
-<a href="https://github.com/ArthurBeaulieu/CustomEvents.js/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/ArthurBeaulieu/CustomEvents.js.svg" alt="License"></a>
-<img src="https://badgen.net/badge/test/passed/green" alt=""></p>
-<p>CustomEvents is a JavaScript ES6 component that offers a general event handler ; an abstraction of <code>addEventListener</code> and <code>removeEventListener</code> methods helps you easily manage your events, without bothering with usual binding issues that come along properly removing events. There is also an internal event system that allow you to define a custom event, and register as many subscriptions as you need to be called when you publish your custom event.</p>
-<p>With 10Ko unminified, CustomEvents was designed to be stable and remain as light as possible. It is meant to be used application wide (events that are global to all your components) or to be used in a classes so it easily manages all the class events (creation and destruction).</p>
+<a href="https://github.com/ArthurBeaulieu/CustomEvents.js/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/ArthurBeaulieu/CustomEvents.js.svg" alt="License"></a></p>
+<p><img src="https://badgen.net/badge/documentation/written/green" alt="">
+<img src="https://badgen.net/badge/test/passed/green" alt="">
+<img src="https://badgen.net/badge/dependencies/none/green" alt=""></p>
+<p><code>CustomEvents.js</code> is a JavaScript ES6 component that offers a general event handler ; an abstraction of <code>addEventListener</code> and <code>removeEventListener</code> methods helps you easily manage your events, without bothering with usual binding issues that come along properly removing events. There is also an internal event system that allow you to define a custom event, and register as many subscriptions as you need to be called when you publish your custom event.</p>
+<p>With ~5Ko minified, <code>CustomEvents.js</code> is designed to be stable and remain as light as possible. It is meant to be used application wide (events that are global to all your components) or to be used in classes, so it easily manages all the class events (creation and destruction).</p>
 <h1>Get Started</h1>
-<p>This repository was made to store documentation, test bench and source code. If you want to include this component in your project, you either need the <code>CustomEvents.js</code> file if you have an assets bundler in your project, or use the <code>CustomEvents.min.js</code> to use the minified component.</p>
+<p>This repository was made to store documentation, test bench and source code. If you want to include this component in your project, you either need the <code>src/CustomEvents.js</code> file if you have an assets bundler in your project, or use the <code>dist/CustomEvents.min.js</code> to use the minified component. This minified file is compiled in ES5 JavaScript for compatibility reasons. The unminified file is, in the contrary, coded in ES6 JavaScript.</p>
 <p>Here's an example on how to create a custom event handler :</p>
 <pre class="prettyprint source lang-javascript"><code>/* Import the Js component */
-import CustomEvents from 'CustomEvents.js';
-/* Create an event handler*/
+import CustomEvents from 'src/CustomEvents.js';
+/* Create an event handler */
 const myEventHandler = new CustomEvents();
 /* ...Or, if you want to have a verbose console output */
 const myEventHandler = new CustomEvents(true);
 </code></pre>
-<p>When instanciated, your event handler is ready to register events.</p>
+<p>When instantiated, your event handler is ready to register events (both JavaScript and custom ones).</p>
 <h2>Regular event listeners</h2>
 <p>When you need to <code>addEventListener</code> on an element, you instead may call the <code>addEvent</code> method that is alike :</p>
 <pre class="prettyprint source lang-javascript"><code>const testDiv = document.createElement('DIV');
@@ -129,7 +131,8 @@ myEventHandler.unsubscribe(customEventId);
 myEventHandler.unsubscribeAllFor('ExampleEvent');
 // ...Or, calling destroy will also unregister saved subscriptions, among destroying handler
 myEventHandler.destroy();
-</code></pre></article>
+</code></pre>
+<p>If you have any question or idea, feel free to DM or open an issue (or even a PR, who knows) ! I'll be glad to answer your request.</p></article>
     </section>
 
 

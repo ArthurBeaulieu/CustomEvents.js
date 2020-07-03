@@ -4,13 +4,13 @@ module.exports = env => {
   const TerserPlugin = require('terser-webpack-plugin');
   const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   // Utils path
-  const SRC = path.resolve(__dirname, '');
+  const SRC = path.resolve(__dirname, 'src');
   const DIST = path.resolve(__dirname, 'dist');
   // Webpack configuration object
   return {
     mode: env.dev === 'true' ? 'development' : 'production',
     watch: env.dev === 'true',
-    entry: ['./CustomEvents.js'],
+    entry: ['./src/CustomEvents.js'],
     stats: {
       warnings: env.dev === 'true',
     },
