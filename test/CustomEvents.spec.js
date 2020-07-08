@@ -23,7 +23,7 @@ describe('CustomEvents unit test', () => {
     expect(typeof AppEvents._idIncrementor).toEqual('number');
     expect(AppEvents._regularEvents.length).toEqual(0);
     expect(Object.keys(AppEvents._customEvents).length).toEqual(0);
-    expect(AppEvents.version).toEqual('1.0.0'); // Check version number
+    expect(AppEvents.version).toEqual('1.1.0'); // Check version number
     done();
   });
 
@@ -309,7 +309,7 @@ describe('CustomEvents unit test', () => {
 
   it('Public method publish without data', done => {
     AppEvents.subscribe('TestEvent', data => {
-      expect(data).toEqual(undefined); // Default value for empty data must be undefined
+      expect(data).toEqual(null); // Default value for empty data must be undefined
     });
     // All subscribe expects will be handle in publish call
     expect(AppEvents.publish('TestEvent')).toEqual(true);

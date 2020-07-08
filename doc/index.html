@@ -58,7 +58,7 @@
 
     <section>
         <article class="readme"><h1>CustomEvents.js</h1>
-<p><img src="https://badgen.net/badge/version/1.0.0/blue" alt="">
+<p><img src="https://badgen.net/badge/version/1.1.0/blue" alt="">
 <a href="https://github.com/ArthurBeaulieu/CustomEvents.js/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/ArthurBeaulieu/CustomEvents.js.svg" alt="License"></a></p>
 <p><img src="https://badgen.net/badge/documentation/written/green" alt="">
 <img src="https://badgen.net/badge/test/passed/green" alt="">
@@ -132,6 +132,15 @@ myEventHandler.unsubscribeAllFor('ExampleEvent');
 // ...Or, calling destroy will also unregister saved subscriptions, among destroying handler
 myEventHandler.destroy();
 </code></pre>
+<h1>Development</h1>
+<p>If you clone this repository, you can <code>npm install</code> to install development dependencies. This will allow you to build dist file, run the component tests or generate the documentation ;</p>
+<ul>
+<li><code>npm run build</code> to generate the minified file ;</li>
+<li><code>npm run dev</code> to watch for any change in source code ;</li>
+<li><code>npm run doc</code> to generate documentation ;</li>
+<li><code>npm run test</code> to perform all test at once ;</li>
+<li><code>npm run testdev</code> to keep browsers open to debug tests ;</li>
+</ul>
 <p>If you have any question or idea, feel free to DM or open an issue (or even a PR, who knows) ! I'll be glad to answer your request.</p></article>
     </section>
 
@@ -144,7 +153,7 @@ myEventHandler.destroy();
 
 <footer>
     <img class="logo" src="img/toast-ui.png" style="">
-    <div class="footer-text">CustomEvent.js</div>
+    <div class="footer-text">CustomEvent.js - Version 1.1.0</div>
 </footer>
 <script>prettyPrint();</script>
 <script src="scripts/jquery.min.js"></script>

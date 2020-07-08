@@ -1,6 +1,6 @@
 # CustomEvents.js
 
-![](https://badgen.net/badge/version/1.0.0/blue)
+![](https://badgen.net/badge/version/1.1.0/blue)
 [![License](https://img.shields.io/github/license/ArthurBeaulieu/CustomEvents.js.svg)](https://github.com/ArthurBeaulieu/CustomEvents.js/blob/master/LICENSE.md)
 
 ![](https://badgen.net/badge/documentation/written/green)
