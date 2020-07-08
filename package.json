@@ -1,12 +1,12 @@
 {
   "name": "customevents.js",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Custom events handler for JavaScript apps. KISS, light and library free.",
   "keywords": ["javascript", "event-handler", "register-events", "event-listener", "es6-module"],
   "main": "CustomEvents.js",
   "scripts": {
-    "build": "webpack --env.version=1.0.0 --progress",
-    "dev": "webpack --env.version=1.0.0 --env.dev=true --progress",
+    "build": "webpack --env.version=1.1.0 --progress",
+    "dev": "webpack --env.version=1.1.0 --env.dev=true --progress",
     "doc": "jsdoc -c doc/jsDoc.json",
     "test": "karma start karma.config.js",
     "testdev": "karma start karma.config.js --dev=true",
