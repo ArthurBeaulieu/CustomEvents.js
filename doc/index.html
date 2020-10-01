@@ -26,7 +26,7 @@
     <div class="title">
         <h1><a href="index.html" class="link">CustomEvent.js</a></h1>
         
-            <span class="version">v1.1.0</span>
+            <span class="version">v1.2.0</span>
         
     </div>
     <div class="search-container" id="search-container">
@@ -58,13 +58,13 @@
 
     <section>
         <article class="readme"><h1>CustomEvents.js</h1>
-<p><img src="https://badgen.net/badge/version/1.1.0/blue" alt="">
-<a href="https://github.com/ArthurBeaulieu/CustomEvents.js/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/ArthurBeaulieu/CustomEvents.js.svg" alt="License"></a></p>
-<p><img src="https://badgen.net/badge/documentation/written/green" alt="">
+<p><img src="https://badgen.net/badge/version/1.2.0/blue" alt="">
+<a href="https://github.com/ArthurBeaulieu/CustomEvents.js/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/ArthurBeaulieu/CustomEvents.js.svg" alt="License"></a>
+<img src="https://badgen.net/badge/documentation/written/green" alt="">
 <img src="https://badgen.net/badge/test/passed/green" alt="">
 <img src="https://badgen.net/badge/dependencies/none/green" alt=""></p>
 <p><code>CustomEvents.js</code> is a JavaScript ES6 component that offers a general event handler ; an abstraction of <code>addEventListener</code> and <code>removeEventListener</code> methods helps you easily manage your events, without bothering with usual binding issues that come along properly removing events. There is also an internal event system that allow you to define a custom event, and register as many subscriptions as you need to be called when you publish your custom event.</p>
-<p>With ~5Ko minified, <code>CustomEvents.js</code> is designed to be stable and remain as light as possible. It is meant to be used application wide (events that are global to all your components) or to be used in classes, so it easily manages all the class events (creation and destruction).</p>
+<p>With ~6Ko minified, <code>CustomEvents.js</code> is designed to be stable and remain as light as possible. It is meant to be used application wide (events that are global to all your components) or to be used in classes, so it easily manages all the class events (creation and destruction).</p>
 <h1>Get Started</h1>
 <p>This repository was made to store documentation, test bench and source code. If you want to include this component in your project, you either need the <code>src/CustomEvents.js</code> file if you have an assets bundler in your project, or use the <code>dist/CustomEvents.min.js</code> to use the minified component. This minified file is compiled in ES5 JavaScript for compatibility reasons. The unminified file is, in the contrary, coded in ES6 JavaScript.</p>
 <p>Here's an example on how to create a custom event handler :</p>
@@ -132,15 +132,19 @@ myEventHandler.unsubscribeAllFor('ExampleEvent');
 // ...Or, calling destroy will also unregister saved subscriptions, among destroying handler
 myEventHandler.destroy();
 </code></pre>
+<p>You're now good to go! If however you need more information, you can read the online <a href="https://arthurbeaulieu.github.io/CustomEvents.js/doc/">documentation</a>.</p>
 <h1>Development</h1>
 <p>If you clone this repository, you can <code>npm install</code> to install development dependencies. This will allow you to build dist file, run the component tests or generate the documentation ;</p>
 <ul>
 <li><code>npm run build</code> to generate the minified file ;</li>
 <li><code>npm run dev</code> to watch for any change in source code ;</li>
+<li><code>npm run web-server</code> to launch a local development server ;</li>
 <li><code>npm run doc</code> to generate documentation ;</li>
-<li><code>npm run test</code> to perform all test at once ;</li>
+<li><code>npm run test</code> to perform all tests at once ;</li>
 <li><code>npm run testdev</code> to keep browsers open to debug tests ;</li>
+<li><code>npm run beforecommit</code> to perform tests, generate doc and bundle the JavaScript.</li>
 </ul>
+<p>To avoid CORS when locally loading the example HTML file, run the web server. Please do not use it on a production environment. Unit tests are performed on both Firefox and Chrome ; ensure you have both installed before running tests, otherwise they might fail.</p>
 <p>If you have any question or idea, feel free to DM or open an issue (or even a PR, who knows) ! I'll be glad to answer your request.</p></article>
     </section>
 
@@ -153,7 +157,7 @@ myEventHandler.destroy();
 
 <footer>
     <img class="logo" src="img/toast-ui.png" style="">
-    <div class="footer-text">CustomEvent.js - Version 1.1.0</div>
+    <div class="footer-text">CustomEvent.js - Version 1.2.0</div>
 </footer>
 <script>prettyPrint();</script>
 <script src="scripts/jquery.min.js"></script>

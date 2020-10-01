@@ -1,18 +1,18 @@
 module.exports = config => {
   config.set({
-    basePath: './',
+    basePath: '../',
     singleRun: !config.dev, // Keep browser open in dev mode
-    browsers: ['Firefox', 'Chromium'],
+    browsers: ['Firefox', 'Chrome'],
     frameworks: ['jasmine'],
     client: {
       jasmine: {
         random: !config.dev // Randomized in !dev mode
       }
     },
-    files: ['./test/testContext.js'],
+    files: ['test/testContext.js'],
     reporters: ['progress'],
     preprocessors: {
-      './test/testContext.js': ['webpack']
+      'test/testContext.js': ['webpack']
     },
     babelPreprocessor: {
       options: {

@@ -1,4 +1,4 @@
-.idea
 node_modules
+.idea
+test/coverage
 package-lock.json
-.directory

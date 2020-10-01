@@ -23,7 +23,7 @@ describe('CustomEvents unit test', () => {
     expect(typeof AppEvents._idIncrementor).toEqual('number');
     expect(AppEvents._regularEvents.length).toEqual(0);
     expect(Object.keys(AppEvents._customEvents).length).toEqual(0);
-    expect(AppEvents.version).toEqual('1.1.0'); // Check version number
+    expect(AppEvents.version).toEqual('1.2.0'); // Check version number
     done();
   });
 

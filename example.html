@@ -1,41 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>CustomEvents.js 1.1.0 - Demo</title>
-    <style>
-html, body { font-family: sans-serif; height: 100%; margin: 0; width: 100%; }
-body { align-items: center; display: flex; flex-direction: column; justify-content: center; }
-button { border: solid 1px grey; border-radius: 5px; cursor: pointer; margin: 5px; padding: 5px 10px; }
-button[disabled] { cursor: not-allowed; }
-    </style>
-  </head>
-  <body>
-    <a href="https://github.com/ArthurBeaulieu/CustomEvents.js" target="_blank" style="position: absolute; left: 0; top: 0;"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
-    <h1>CustomEvents.js - Version 1.1.0</h1>
-    <h3>Custom event, see console (subscribe/unsubscribe/publish)</h3>
-    <button id="subOnce" type="button">One shot subscribe</button>
-    <button id="sub" type="button">Subscribe</button>
-    <button id="unsub" type="button">Unsubscribe</button>
-    <button id="pub" type="button">Publish</button>
-    <h3>Event listener overlay, see console (addEvent/removeEvent)</h3>
-    <button id="fireevt" type="button">Click me</button>
-    <button id="addevt" type="button">addEventListener</button>
-    <button id="rmevt" type="button">removeEventListener</button>
-    <h3>Destroy CustomEvents (will output errors in console)</h3>
-    <button id="destroy" type="button">Destroy</button>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta content="ie=edge" http-equiv="x-ua-compatible">
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="initial-scale=1" name="viewport">
+  <meta name="description" content="Custom events handler for JavaScript apps. KISS, light and library free.">
+  <title>CustomEvents.js 1.2.0 - Demo</title>
+  <style>
+    html, body { align-items: center; display: flex; flex-direction: column; font-family: sans-serif; height: 100%; justify-content: center; margin: 0; width: 100%; }
+    html { width: 100%; }
+    body { text-align: center; width: 80%; }
+    hr { color: white; width: 75%; }
+    button { border: solid 1px grey; border-radius: 5px; cursor: pointer; margin: 5px; padding: 5px 10px; }
+    button[disabled] { cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <a href="https://github.com/ArthurBeaulieu/CustomEvents.js" target="_blank" style="position: absolute; right: 0; top: 0;"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub"></a>
+  <h1>CustomEvents.js – Version 1.2.0</h1>
+  <hr>
+  <h3>Custom event, see console (subscribe/unsubscribe/publish)</h3>
+  <button id="subOnce" type="button">One shot subscribe</button>
+  <button id="sub" type="button">Subscribe</button>
+  <button id="unsub" type="button">Unsubscribe</button>
+  <button id="pub" type="button">Publish</button>
+  <h3>Event listener overlay, see console (addEvent/removeEvent)</h3>
+  <button id="fireevt" type="button">Click me</button>
+  <button id="addevt" type="button">addEventListener</button>
+  <button id="rmevt" type="button">removeEventListener</button>
+  <h3>Destroy CustomEvents (will output errors in console)</h3>
+  <button id="destroy" type="button">Destroy</button>
+  <hr>
+  <p>
+    <a href="https://github.com/ArthurBeaulieu/CustomEvents.js/releases" title="Releases" target="_blank" rel="noreferrer noopener"><img src="https://badgen.net/badge/version/1.2.0/blue" alt="version-badge"></a>
+    <a href="https://github.com/ArthurBeaulieu/CustomEvents.js/blob/master/LICENSE" title="License" target="_blank" rel="noreferrer noopener"><img src="https://img.shields.io/github/license/ArthurBeaulieu/CustomEvents.js.svg" alt="license-badge"></a>
+    <a href="doc/index.html" title="Documentation" target="_blank" rel="noreferrer noopener"><img src="https://badgen.net/badge/documentation/written/green" alt="documentation-badge"></a>
+    <img src="https://badgen.net/badge/test/passed/green" alt="test-badge" title="Run npm run test">
+    <img src="https://badgen.net/badge/dependencies/none/green" alt="dependencies-badge" title="Check package.json file">
+  </p>
+  <p style="font-size: .9rem; font-style: italic; margin: 0;">Arthur Beaulieu – October 2020</p>
   <script type="module">
     import CustomEvents from './src/CustomEvents.js';
+    // Create custom event singleton
     const MyAppEvents = new CustomEvents(true);
-
     /* Custom events */
-
     // Demo utils
     const subOnceButton = document.getElementById('subOnce');
     const subButton = document.getElementById('sub');
     const unsubButton = document.getElementById('unsub');
     const pubButton = document.getElementById('pub');
+    // Init unsubscribe button to disable
     unsubButton.disabled = true;
     let myEventId = -1;
     subOnceButton.addEventListener('click', () => {
@@ -66,37 +81,33 @@ button[disabled] { cursor: not-allowed; }
         data: 'MyEventData'
       });
     }, false);
-
     /* Event listener overlay */
-
     // Demo utils
     const fireEvt = document.getElementById('fireevt');
     const addEvt = document.getElementById('addevt');
     const rmEvt = document.getElementById('rmevt');
+    // Init remove event button to disable
     rmEvt.disabled = true;
-
+    // Callback to call when click event is fired
     const cb = event => {
       console.log('Click callback fired', event);
     };
-
     let evtId = null;
     addEvt.addEventListener('click', () => {
       evtId = MyAppEvents.addEvent('click', fireEvt, cb, this);
       rmEvt.disabled = false;
       addEvt.disabled = true;
     });
-
     rmEvt.addEventListener('click', () => {
       addEvt.disabled = false;
       rmEvt.disabled = true;
       MyAppEvents.removeEvent(evtId);
     });
-
     /* Destroy CustomEvents handler */
     const destroy = document.getElementById('destroy');
     destroy.addEventListener('click', () => {
       MyAppEvents.destroy();
     });
-
   </script>
+</body>
 </html>

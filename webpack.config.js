@@ -1,16 +1,15 @@
 module.exports = env => {
   // Webpack clean and uglify plugins
   const path = require('path');
-  const TerserPlugin = require('terser-webpack-plugin');
   const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   // Utils path
-  const SRC = path.resolve(__dirname, 'src');
+  const SRC = path.resolve(__dirname, '');
   const DIST = path.resolve(__dirname, 'dist');
   // Webpack configuration object
   return {
     mode: env.dev === 'true' ? 'development' : 'production',
     watch: env.dev === 'true',
-    entry: ['./src/CustomEvents.js'],
+    entry: ['src/CustomEvents.js'],
     stats: {
       warnings: env.dev === 'true',
     },
@@ -19,7 +18,18 @@ module.exports = env => {
       path: DIST,
       filename: `CustomEvents.min.js`
     },
-    module: {},
+    module: { // Only transpile code in production mode
+      rules: env.dev === 'true' ? [] : [{
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      }]
+    },
     plugins: [
       new CleanWebpackPlugin({
         root: DIST,
@@ -30,16 +40,6 @@ module.exports = env => {
     resolve: {
       extensions: ['.js'],
       modules: ['node_modules', SRC]
-    },
-    optimization: {
-      minimizer: [
-        new TerserPlugin({
-          parallel: 4,
-          terserOptions: {
-            ecma: 5
-          }
-        })
-      ]
     }
   };
 };
