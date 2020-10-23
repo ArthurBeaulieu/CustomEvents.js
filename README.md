@@ -10,6 +10,8 @@
 
 With ~6Ko minified, `CustomEvents.js` is designed to be stable and remain as light as possible. It is meant to be used application wide (events that are global to all your components) or to be used in classes, so it easily manages all the class events (creation and destruction).
 
+[Try me here!](https://arthurbeaulieu.github.io/CustomEvents.js/example.html)
+
 # Get Started
 
 This repository was made to store documentation, test bench and source code. If you want to include this component in your project, you either need the `src/CustomEvents.js` file if you have an assets bundler in your project, or use the `dist/CustomEvents.min.js` to use the minified component. This minified file is compiled in ES5 JavaScript for compatibility reasons. The unminified file is, in the contrary, coded in ES6 JavaScript.
