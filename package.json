@@ -1,12 +1,18 @@
 {
   "name": "customevents.js",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Custom events handler for JavaScript apps. KISS, light and library free.",
-  "keywords": ["javascript", "event-handler", "register-events", "event-listener", "es6-module"],
+  "keywords": [
+    "javascript",
+    "event-handler",
+    "register-events",
+    "event-listener",
+    "es6-module"
+  ],
   "main": "CustomEvents.js",
   "scripts": {
-    "build": "webpack --env.version=1.2.0 --progress",
-    "dev": "webpack --env.version=1.2.0 --env.dev=true --progress",
+    "build": "webpack --env version=1.2.1 --progress",
+    "dev": "webpack --env version=1.2.1 --env dev=true --progress",
     "web-server": "http-server -p 1337 -c-1 -o example.html",
     "doc": "jsdoc -c doc/jsDoc.json",
     "test": "karma start test/karma.config.js",
@@ -37,7 +43,7 @@
     "karma-firefox-launcher": ">=1.1.0",
     "karma-jasmine": ">=1.1.2",
     "karma-sourcemap-loader": ">=0.3.7",
-    "karma-webpack": ">=4.0.0",
+    "karma-webpack": "^4.0.0",
     "tui-jsdoc-template": ">=1.2.2",
     "webpack": ">=4.16.5",
     "webpack-cli": ">=3.1.0"

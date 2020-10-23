@@ -32,7 +32,7 @@ class CustomEvents {
     this._customEvents = {};
     /** @public
      * @member {string} - Component version */
-    this.version = '1.2.0';
+    this.version = '1.2.1';
   }
 
 
