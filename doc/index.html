@@ -2,48 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Home | CustomEvent.js</title>
+    <title>JSDoc: Home</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
-
-    
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
 </head>
+
 <body>
-<nav class="lnb" id="lnb">
-    <div class="logo" style="">
-        
-            <img src="img/toast-ui.png" width="100%" height="100%">
-        
-    </div>
-    <div class="title">
-        <h1><a href="index.html" class="link">CustomEvent.js</a></h1>
-        
-            <span class="version">v1.2.1</span>
-        
-    </div>
-    <div class="search-container" id="search-container">
-        <input type="text" placeholder="Search">
-        <ul></ul>
-    </div>
-    
-    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="CustomEvents.html">CustomEvents</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="CustomEvents_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="CustomEvents.html#_customEvents">_customEvents</a></li><li><a href="CustomEvents.html#_debug">_debug</a></li><li><a href="CustomEvents.html#_idIncrementor">_idIncrementor</a></li><li><a href="CustomEvents.html#_regularEvents">_regularEvents</a></li><li><a href="CustomEvents.html#version">version</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="CustomEvents.html#._clearRegularEvent">_clearRegularEvent</a></li><li><a href="CustomEvents.html#._raise">_raise</a></li><li><a href="CustomEvents.html#.addEvent">addEvent</a></li><li><a href="CustomEvents.html#.destroy">destroy</a></li><li><a href="CustomEvents.html#.publish">publish</a></li><li><a href="CustomEvents.html#.removeAllEvents">removeAllEvents</a></li><li><a href="CustomEvents.html#.removeEvent">removeEvent</a></li><li><a href="CustomEvents.html#.subscribe">subscribe</a></li><li><a href="CustomEvents.html#.unsubscribe">unsubscribe</a></li><li><a href="CustomEvents.html#.unsubscribeAllFor">unsubscribeAllFor</a></li></ul></div></li></ul></div>
-</nav>
-<div id="resizer"></div>
 
-<div class="main" id="main">
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
     
 
 
 
     
+
+
+    <h3> </h3>
+
 
 
 
@@ -54,10 +38,12 @@
 
 
     
+
+
 
 
     <section>
-        <article class="readme"><h1>CustomEvents.js</h1>
+        <article><h1>CustomEvents.js</h1>
 <p><img src="https://badgen.net/badge/version/1.2.1/blue" alt="">
 <a href="https://github.com/ArthurBeaulieu/CustomEvents.js/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/ArthurBeaulieu/CustomEvents.js.svg" alt="License"></a>
 <img src="https://badgen.net/badge/documentation/written/green" alt="">
@@ -65,6 +51,7 @@
 <img src="https://badgen.net/badge/dependencies/none/green" alt=""></p>
 <p><code>CustomEvents.js</code> is a JavaScript ES6 component that offers a general event handler ; an abstraction of <code>addEventListener</code> and <code>removeEventListener</code> methods helps you easily manage your events, without bothering with usual binding issues that come along properly removing events. There is also an internal event system that allow you to define a custom event, and register as many subscriptions as you need to be called when you publish your custom event.</p>
 <p>With ~6Ko minified, <code>CustomEvents.js</code> is designed to be stable and remain as light as possible. It is meant to be used application wide (events that are global to all your components) or to be used in classes, so it easily manages all the class events (creation and destruction).</p>
+<p><a href="https://arthurbeaulieu.github.io/CustomEvents.js/example.html">Try me here!</a></p>
 <h1>Get Started</h1>
 <p>This repository was made to store documentation, test bench and source code. If you want to include this component in your project, you either need the <code>src/CustomEvents.js</code> file if you have an assets bundler in your project, or use the <code>dist/CustomEvents.min.js</code> to use the minified component. This minified file is compiled in ES5 JavaScript for compatibility reasons. The unminified file is, in the contrary, coded in ES6 JavaScript.</p>
 <p>Here's an example on how to create a custom event handler :</p>
@@ -155,24 +142,17 @@ myEventHandler.destroy();
 
 </div>
 
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CustomEvents.html">CustomEvents</a></li></ul>
+</nav>
+
+<br class="clear">
+
 <footer>
-    <img class="logo" src="img/toast-ui.png" style="">
-    <div class="footer-text">CustomEvent.js - Version 1.2.0</div>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Aug 26 2021 09:38:11 GMT+0200 (GMT+02:00)
 </footer>
-<script>prettyPrint();</script>
-<script src="scripts/jquery.min.js"></script>
-<script src="scripts/tui-doc.js"></script>
-<script src="scripts/linenumber.js"></script>
 
-    <script>
-        var id = 'package:customevents.js_sub'.replace(/"/g, '_');
-        var selectedApi = document.getElementById(id); // do not use jquery selector
-        var $selectedApi = $(selectedApi);
-
-        $selectedApi.removeClass('hidden');
-        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
-        showLnbApi();
-    </script>
-
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
 </body>
 </html>

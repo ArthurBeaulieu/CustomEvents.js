@@ -1,16 +1,26 @@
+'use strict';
+
+const webpack = require('webpack');
+const loaders = require('../webpack/loaders');
+const plugins = require('../webpack/plugins');
+
 module.exports = config => {
   config.set({
     basePath: '../',
     singleRun: !config.dev, // Keep browser open in dev mode
-    browsers: ['Firefox', 'Chrome'],
+    browsers: ['Firefox'], // TODO optionnaly launch browsers
     frameworks: ['jasmine'],
     client: {
       jasmine: {
-        random: !config.dev // Randomized in !dev mode
+        clearContext: false,
+        random: !config.dev // Randomly run test when not developping them
       }
     },
-    files: ['test/testContext.js'],
-    reporters: ['progress'],
+    files: [
+      'test/testContext.js',
+      'test/testStyle.css'    
+    ],
+    reporters: ['kjhtml', 'progress'],
     preprocessors: {
       'test/testContext.js': ['webpack']
     },
@@ -23,14 +33,18 @@ module.exports = config => {
     webpack: {
       devtool: false,
       module: {
-        rules: [{
-          test: /\.js/,
-          exclude: /node_modules/,
-          use: [{
-            loader: 'babel-loader'
-          }]
-        }]
+        rules: [
+          loaders.JSLoader,
+          loaders.CSSLoader
+        ]
       },
+      plugins: [
+        new webpack.ProgressPlugin(),
+        plugins.CleanWebpackPlugin,
+        plugins.ESLintPlugin,
+        plugins.StyleLintPlugin,
+        plugins.MiniCssExtractPlugin
+      ],
       watch: true,
       mode: 'development'
     },
